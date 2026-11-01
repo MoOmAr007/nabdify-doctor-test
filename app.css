@@ -1,0 +1,253 @@
+@font-face { font-family: Cairo; font-weight: 400; src: url(fonts/cairo-arabic-400-normal.woff2) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: Cairo; font-weight: 600; src: url(fonts/cairo-arabic-600-normal.woff2) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: Cairo; font-weight: 700; src: url(fonts/cairo-arabic-700-normal.woff2) format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: Cairo; font-weight: 400; src: url(fonts/cairo-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: Cairo; font-weight: 700; src: url(fonts/cairo-latin-700-normal.woff2) format('woff2'); }
+
+/* هوية Nabdify: أخضر #0F6E56، أخضر غامق #0A3D33، أصفر #FDE68A — أسطح زجاجية وخطوط رفيعة */
+:root {
+  --bg: #041f19; --bg2: #0A3D33;
+  --s1: rgba(255,255,255,.04); --s2: rgba(255,255,255,.07); --s3: rgba(255,255,255,.1);
+  --line: rgba(255,255,255,.08); --line2: rgba(255,255,255,.13);
+  --t: #f2f7f5; --t2: #c2d6d0; --m: #84a39b;
+  --a: #FDE68A; --a2: #1d9e75; --a-rgb: 253,230,138; --a2-rgb: 29,158,117; --on-a: #0A3D33; --ok: #4fd1a5; --glow: rgba(253,230,138,.35);
+  --red: #ff7b7b; --redbg: rgba(255,123,123,.1); --amb: #ffc864; --ambbg: rgba(255,200,100,.1); --blue: #7ab3ff; --bluebg: rgba(122,179,255,.12);
+  --r: 18px;
+  --g1: rgba(15,110,86,.55); --g2: rgba(253,230,138,.06); --navbg: rgba(6,40,33,.78); --alertt: #ffd8d8; --shadow: 0 10px 40px rgba(0,0,0,.45);
+}
+/* الوضع النهاري: أبيض مخضر ناعم بنفس اللمسة */
+:root[data-theme="light"], :root[data-theme="light"] body { color-scheme: light; }
+:root[data-theme="light"] {
+    --bg: #f4f8f6; --bg2: #ffffff;
+    --s1: rgba(255,255,255,.85); --s2: rgba(10,61,51,.05); --s3: rgba(10,61,51,.08);
+    --line: rgba(10,61,51,.09); --line2: rgba(10,61,51,.15);
+    --t: #0A3D33; --t2: #2c5a50; --m: #6b857e;
+    --a: #0F6E56; --a2: #0A3D33; --a-rgb: 15,110,86; --a2-rgb: 10,61,51; --on-a: #ffffff; --ok: #0F6E56; --glow: rgba(15,110,86,.25);
+    --red: #d64545; --redbg: rgba(214,69,69,.08); --amb: #b7791f; --ambbg: rgba(253,230,138,.45); --blue: #2f6fe0; --bluebg: rgba(47,111,224,.1);
+    --g1: rgba(15,110,86,.14); --g2: rgba(253,230,138,.35); --navbg: rgba(255,255,255,.85); --alertt: #7a2323; --shadow: 0 10px 30px rgba(10,61,51,.12);
+}
+@media (prefers-color-scheme: light) {
+  :root[data-theme="auto"] {
+    --bg: #f4f8f6; --bg2: #ffffff;
+    --s1: rgba(255,255,255,.85); --s2: rgba(10,61,51,.05); --s3: rgba(10,61,51,.08);
+    --line: rgba(10,61,51,.09); --line2: rgba(10,61,51,.15);
+    --t: #0A3D33; --t2: #2c5a50; --m: #6b857e;
+    --a: #0F6E56; --a2: #0A3D33; --a-rgb: 15,110,86; --a2-rgb: 10,61,51; --on-a: #ffffff; --ok: #0F6E56; --glow: rgba(15,110,86,.25);
+    --red: #d64545; --redbg: rgba(214,69,69,.08); --amb: #b7791f; --ambbg: rgba(253,230,138,.45); --blue: #2f6fe0; --bluebg: rgba(47,111,224,.1);
+    --g1: rgba(15,110,86,.14); --g2: rgba(253,230,138,.35); --navbg: rgba(255,255,255,.85); --alertt: #7a2323; --shadow: 0 10px 30px rgba(10,61,51,.12);
+  }
+}
+* { box-sizing: border-box; margin: 0; -webkit-tap-highlight-color: transparent; }
+html, body { min-height: 100%; }
+body { font-family: Cairo, system-ui, sans-serif; background: var(--bg); color: var(--t); font-size: 15px; overscroll-behavior: none; -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(120% 60% at 85% -10%, var(--g1), transparent 60%), radial-gradient(90% 50% at 0% 0%, var(--g2), transparent 60%);
+  background-attachment: fixed; }
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+input { font: inherit; color: var(--t); width: 100%; background: var(--s1); border: 1px solid var(--line2); border-radius: 14px; padding: 13px 15px; outline: none; transition: border-color .2s, box-shadow .2s; }
+input::placeholder { color: var(--m); }
+input:focus { border-color: var(--a); box-shadow: 0 0 0 4px rgba(var(--a-rgb),.12); }
+svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+.muted { color: var(--m); font-size: 12px; }
+.num { font-feature-settings: 'tnum'; }
+
+#app { min-height: 100vh; display: flex; flex-direction: column; }
+.top { padding: calc(env(safe-area-inset-top) + 18px) 20px 6px; }
+.eyebrow { font-size: 12px; color: var(--m); letter-spacing: .02em; }
+.top h1 { font-size: 26px; font-weight: 700; letter-spacing: -.01em; }
+.back { display: inline-flex; align-items: center; gap: 4px; color: var(--t2); font-size: 13px; padding: 4px 0; }
+.back svg { width: 16px; height: 16px; }
+.main { flex: 1; padding: 12px 16px calc(110px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 12px; }
+
+.glass { background: var(--s1); border: 1px solid var(--line); border-radius: var(--r); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.card { padding: 14px 16px; }
+.section { display: flex; align-items: center; justify-content: space-between; color: var(--m); font-size: 12px; margin: 6px 4px -2px; letter-spacing: .02em; }
+
+/* شريط التاريخ */
+.datebar { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; padding: 6px; }
+.datebar b { font-size: 15px; } .datebar small { display: block; color: var(--a); font-size: 11px; font-weight: 600; text-align: center; }
+.datebar button { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: var(--t2); }
+.datebar button:active { background: var(--s2); }
+
+/* الأرقام */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.stat { padding: 12px 10px; text-align: center; }
+.stat b { display: block; font-size: 24px; font-weight: 700; line-height: 1.2; }
+.stat span { font-size: 11px; color: var(--m); }
+.stat.hl b { background: linear-gradient(135deg, var(--a), var(--a2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* المواعيد كخط زمني */
+.timeline { display: flex; flex-direction: column; }
+.slot { display: grid; grid-template-columns: 58px 18px 1fr; align-items: stretch; width: 100%; text-align: right; }
+.slot .tm { padding-top: 14px; font-weight: 700; font-size: 14px; white-space: nowrap; } .slot .tm small { display: block; font-weight: 400; font-size: 11px; color: var(--m); }
+.slot .rail { position: relative; } .slot .rail::before { content: ''; position: absolute; top: 0; bottom: 0; right: 8px; width: 1px; background: var(--line2); }
+.slot:first-child .rail::before { top: 20px; } .slot:last-child .rail::before { bottom: calc(100% - 20px); }
+.slot .rail i { position: absolute; top: 18px; right: 4px; width: 9px; height: 9px; border-radius: 50%; background: var(--m); box-shadow: 0 0 0 4px var(--bg); }
+.slot .box { margin: 5px 0; padding: 11px 14px; display: flex; gap: 10px; align-items: center; }
+.slot .box .who { flex: 1; min-width: 0; } .slot .box b { display: block; font-size: 15px; }
+.slot .box span { font-size: 12px; color: var(--m); }
+.slot:active .box { background: var(--s2); }
+.st { font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; color: var(--m); white-space: nowrap; }
+.st::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.st-inside { color: var(--blue); } .st-waiting { color: var(--amb); } .st-done { color: var(--ok); } .st-no_show { color: var(--red); }
+.slot.s-inside .rail i { background: var(--blue); box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--blue); }
+.slot.s-waiting .rail i { background: var(--amb); box-shadow: 0 0 0 4px var(--bg), 0 0 12px var(--amb); }
+.slot.s-done .rail i { background: var(--ok); }
+.slot.s-done .box { opacity: .62; }
+.flag { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; color: var(--red); background: var(--redbg); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+.flag svg { width: 12px; height: 12px; }
+.empty { text-align: center; color: var(--m); padding: 44px 12px; }
+
+/* القايمة السفلية العايمة */
+.nav { position: fixed; bottom: calc(14px + env(safe-area-inset-bottom)); inset-inline: 16px; display: flex; justify-content: space-around; padding: 6px;
+  background: var(--navbg); border: 1px solid var(--line2); border-radius: 22px; backdrop-filter: blur(20px) saturate(140%); -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow: var(--shadow); }
+.nav button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10.5px; color: var(--m); font-weight: 600; padding: 7px 0; border-radius: 16px; transition: color .2s, background .2s; }
+.nav button.on { color: var(--a); background: rgba(var(--a-rgb),.09); }
+.nav button.on svg { filter: drop-shadow(0 0 6px var(--glow)); }
+
+/* المرضى */
+.list { display: flex; flex-direction: column; overflow: hidden; }
+.prow { display: flex; gap: 12px; align-items: center; padding: 12px 14px; width: 100%; text-align: right; border-bottom: 1px solid var(--line); }
+.prow:last-child { border-bottom: 0; } .prow:active { background: var(--s2); }
+.av { width: 40px; height: 40px; border-radius: 13px; display: grid; place-items: center; font-weight: 700; font-size: 13px; flex-shrink: 0; color: var(--t);
+  background: linear-gradient(135deg, rgba(var(--a-rgb),.22), rgba(var(--a2-rgb),.14)); border: 1px solid rgba(var(--a-rgb),.25); }
+.prow .who { flex: 1; min-width: 0; } .prow b { display: block; font-size: 15px; } .prow .who span { font-size: 12px; color: var(--m); }
+.prow .side { text-align: left; font-size: 11px; color: var(--m); line-height: 1.6; }
+.owe { color: var(--red); font-weight: 700; }
+.searchbox { position: relative; } .searchbox svg { position: absolute; top: 50%; inset-inline-start: 14px; transform: translateY(-50%); color: var(--m); width: 18px; height: 18px; }
+.searchbox input { padding-inline-start: 42px; }
+
+/* ملف المريض */
+.hero { display: flex; gap: 14px; align-items: center; margin-top: 10px; }
+.hero .av { width: 58px; height: 58px; border-radius: 18px; font-size: 18px; }
+.hero .meta { color: var(--m); font-size: 12px; }
+.alertbox { padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start; background: var(--redbg); border-color: rgba(255,107,107,.25); color: var(--alertt); font-size: 14px; line-height: 1.7; }
+.alertbox svg { color: var(--red); margin-top: 3px; } .alertbox b { display: block; color: var(--red); font-size: 12px; }
+.tabs { display: flex; gap: 4px; padding: 4px; overflow-x: auto; scrollbar-width: none; } .tabs::-webkit-scrollbar { display: none; }
+.tabs button { flex: 1; font-size: 13px; font-weight: 600; padding: 8px 12px; border-radius: 13px; white-space: nowrap; color: var(--m); transition: all .2s; }
+.tabs .on { background: var(--s3); color: var(--t); box-shadow: inset 0 0 0 1px var(--line2); }
+.tr { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 14px; } .tr:last-child { border: 0; }
+.tr .lbl { color: var(--m); font-size: 13px; }
+.prog { height: 4px; background: var(--s3); border-radius: 9px; margin-top: 7px; width: 150px; overflow: hidden; }
+.prog i { display: block; height: 100%; border-radius: 9px; background: linear-gradient(90deg, var(--a2), var(--a)); box-shadow: 0 0 10px var(--glow); }
+.frac { font-size: 12px; color: var(--t2); font-weight: 600; white-space: nowrap; }
+.item { padding: 11px 0; border-bottom: 1px solid var(--line); line-height: 1.8; font-size: 14px; } .item:last-child { border: 0; }
+.item .d { font-size: 12px; color: var(--a); font-weight: 600; }
+.rx { display: flex; gap: 8px; align-items: baseline; } .rx svg { width: 14px; height: 14px; color: var(--a2); transform: translateY(2px); }
+
+/* الفلوس */
+.seg { display: flex; padding: 4px; gap: 4px; } .seg button { flex: 1; padding: 8px; font-size: 13px; font-weight: 600; border-radius: 13px; color: var(--m); }
+.seg .on { background: var(--s3); color: var(--t); box-shadow: inset 0 0 0 1px var(--line2); }
+.big { font-size: 38px; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; }
+.big small { font-size: 15px; color: var(--m); font-weight: 600; margin-inline-start: 4px; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; } .chips span { font-size: 11px; color: var(--t2); background: var(--s2); padding: 3px 10px; border-radius: 99px; }
+.chart { display: flex; align-items: flex-end; gap: 5px; height: 110px; margin-top: 18px; }
+.chart i { flex: 1; min-height: 3px; border-radius: 5px 5px 2px 2px; background: linear-gradient(180deg, rgba(var(--a-rgb),.55), rgba(var(--a2-rgb),.12)); }
+.chart i.today { background: linear-gradient(180deg, var(--a), rgba(var(--a-rgb),.35)); box-shadow: 0 0 14px var(--glow); }
+.days { display: flex; gap: 5px; font-size: 10px; color: var(--m); margin-top: 6px; } .days span { flex: 1; text-align: center; overflow: hidden; }
+
+.sync { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--m); justify-content: center; padding: 8px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--a); box-shadow: 0 0 8px var(--a); } .dot.old { background: var(--amb); box-shadow: 0 0 8px var(--amb); }
+
+/* الدخول */
+.login { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 28px 22px; gap: 12px; max-width: 440px; margin: 0 auto; width: 100%; min-height: 100vh; }
+.mark { width: 76px; height: 76px; border-radius: 24px; margin: 0 auto; display: grid; place-items: center; font-size: 34px; font-weight: 700; color: var(--on-a);
+  background: linear-gradient(135deg, var(--a), var(--a2)); box-shadow: 0 0 0 1px rgba(255,255,255,.15) inset, 0 18px 50px rgba(var(--a-rgb),.35); }
+.brand { text-align: center; font-size: 22px; font-weight: 700; letter-spacing: .18em; margin-top: 10px; }
+.tag { text-align: center; color: var(--m); font-size: 13px; margin-bottom: 14px; }
+.login form { padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.login label { font-size: 12px; color: var(--t2); font-weight: 600; margin-bottom: -4px; }
+.btn { background: var(--a); color: var(--on-a); text-align: center; border-radius: 14px; padding: 14px; font-weight: 700; width: 100%; margin-top: 6px;
+  box-shadow: 0 10px 30px rgba(var(--a-rgb),.25); transition: transform .1s, opacity .2s; }
+.btn:active { transform: scale(.98); } .btn:disabled { opacity: .6; }
+.btn.ghost { background: var(--s1); color: var(--red); border: 1px solid rgba(255,107,107,.3); box-shadow: none; }
+.btn.small { width: auto; padding: 9px 22px; }
+.err { color: var(--red); font-size: 13px; text-align: center; min-height: 18px; }
+.note { font-size: 12px; color: var(--m); text-align: center; line-height: 1.8; }
+
+/* تحميل */
+.skel { height: 64px; border-radius: var(--r); background: linear-gradient(90deg, var(--s1), var(--s2), var(--s1)); background-size: 200% 100%; animation: sh 1.2s infinite; }
+@keyframes sh { to { background-position: -200% 0; } }
+.fade { animation: fade .35s ease; } @keyframes fade { from { opacity: 0; transform: translateY(6px); } }
+
+/* علامة المزامنة فوق */
+.top { position: relative; }
+.syncchip-old { position: absolute; top: calc(env(safe-area-inset-top) + 16px); inset-inline-end: 16px; display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11px; font-weight: 600; color: var(--t2); padding: 6px 11px; border-radius: 99px; background: var(--s1); border: 1px solid var(--line); backdrop-filter: blur(12px); }
+.syncchip.old .dot { background: var(--amb); box-shadow: 0 0 8px var(--amb); }
+.syncchip.off .dot { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.syncchip.busy .dot { animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: .3; } }
+
+/* أزرار الاتصال والفلاتر */
+.actions { display: flex; gap: 8px; }
+.act { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px; border-radius: 14px; font-weight: 600; font-size: 14px; color: var(--t); text-decoration: none; }
+.act svg { width: 18px; height: 18px; color: var(--a); }
+.filters { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; } .filters::-webkit-scrollbar { display: none; }
+.filters button { font-size: 12px; font-weight: 600; padding: 6px 13px; border-radius: 99px; background: var(--s1); border: 1px solid var(--line); color: var(--t2); white-space: nowrap; }
+.filters .on { background: var(--a); color: var(--on-a); border-color: transparent; }
+.datebar .mid { position: relative; text-align: center; }
+.datebar input[type=date] { position: absolute; inset: 0; opacity: 0; width: 100%; padding: 0; border: 0; }
+.net { display: flex; gap: 8px; margin-top: 12px; } .net div { flex: 1; padding: 10px 12px; border-radius: 14px; background: var(--s2); } .net b { display: block; font-size: 16px; } .net span { font-size: 11px; color: var(--m); }
+.offline { text-align: center; font-size: 12px; color: var(--amb); background: var(--ambbg); border-radius: 12px; padding: 7px; }
+
+/* أزرار فوق: الوضع + المزامنة (أيقونات بس) */
+.tools { position: absolute; top: calc(env(safe-area-inset-top) + 14px); inset-inline-end: 14px; display: flex; gap: 8px; z-index: 2; }
+.iconbtn { position: relative; width: 40px; height: 40px; border-radius: 13px; display: grid; place-items: center; color: var(--t2);
+  background: var(--s1); border: 1px solid var(--line); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: transform .1s; }
+.iconbtn:active { transform: scale(.94); } .iconbtn svg { width: 19px; height: 19px; }
+.iconbtn.sync .dot { position: absolute; top: 50%; left: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; }
+.iconbtn.sync.old .dot { background: var(--amb); box-shadow: 0 0 8px var(--amb); }
+.iconbtn.sync.off .dot { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.iconbtn.sync.busy svg { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(-360deg); } }
+.seg button svg { width: 20px; height: 20px; }
+/* المزامنة: كلمة + نقطة بدل الأيقونة */
+.iconbtn.sync { width: auto; padding: 0 13px; display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; }
+.iconbtn.sync .dot { position: static; margin: 0; width: 7px; height: 7px; }
+.iconbtn.sync.busy .dot { animation: pulse .8s infinite; }
+
+/* لوجو Nabdify في شاشة الدخول (أبيض في الليلي، أخضر في النهاري) */
+.wordmark { display: block; height: 64px; margin: 0 auto 6px; filter: drop-shadow(0 10px 30px rgba(var(--a2-rgb),.35)); }
+.wm-light { display: none; }
+:root[data-theme="light"] .wm-dark { display: none; } :root[data-theme="light"] .wm-light { display: block; }
+.appicon { display: block; width: 84px; height: 84px; margin: 0 auto 14px; border-radius: 24px; box-shadow: 0 18px 50px rgba(var(--a2-rgb),.35); }
+
+/* الشيت اللي بيطلع من تحت (حجز، جلسة، روشتة، إجراءات الموعد) */
+.sheet-wrap { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.45); display: flex; align-items: flex-end; justify-content: center; animation: fade .2s ease; }
+.sheet { width: 100%; max-width: 520px; max-height: 88vh; display: flex; flex-direction: column; border-radius: 24px 24px 0 0; background: var(--bg); border-bottom: 0;
+  padding-bottom: env(safe-area-inset-bottom); animation: up .25s ease; }
+@keyframes up { from { transform: translateY(40px); } }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px 18px 8px; font-size: 16px; }
+.sheet-body { overflow-y: auto; padding: 4px 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+.sheet textarea { font: inherit; color: var(--t); width: 100%; background: var(--s1); border: 1px solid var(--line2); border-radius: 14px; padding: 12px 14px; outline: none; resize: vertical; }
+.lbl2 { font-size: 12px; color: var(--t2); font-weight: 600; margin-bottom: -4px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; } .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 6px; }
+.btn.soft { background: var(--s2); color: var(--t); box-shadow: none; border: 1px solid var(--line); margin-top: 0; }
+.btn.soft.danger { color: var(--red); }
+.filters.wrap { flex-wrap: wrap; overflow: visible; }
+.slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.slots button { padding: 9px 4px; border-radius: 12px; background: var(--s1); border: 1px solid var(--line); font-size: 13px; font-weight: 600; }
+.slots button.on { background: var(--a); color: var(--on-a); border-color: transparent; }
+.rx-row { padding: 10px; border-radius: 14px; }
+.link { color: var(--red); font-size: 12px; margin-top: 6px; }
+.prow .iconbtn { width: 36px; height: 36px; flex-shrink: 0; text-decoration: none; }
+#toast { position: fixed; bottom: calc(100px + env(safe-area-inset-bottom)); left: 50%; transform: translate(-50%, 20px); opacity: 0; z-index: 60; pointer-events: none;
+  background: var(--t); color: var(--bg); padding: 10px 16px; border-radius: 14px; font-size: 13px; font-weight: 600; transition: all .25s; max-width: 90%; text-align: center; }
+#toast.show { opacity: 1; transform: translate(-50%, 0); } #toast.bad { background: var(--red); color: #fff; }
+/* ملخص الصبح، أزرار بأيقونات، الإملاء */
+.summary { display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 1.7; border-color: rgba(var(--a-rgb), .35); }
+.btn svg, .act svg, .tr span svg { width: 17px; height: 17px; vertical-align: -3px; margin-inline-end: 4px; }
+.btn.rec { background: var(--redbg); color: var(--red); border-color: rgba(255,107,107,.4); }
+a.btn { display: block; text-decoration: none; }
+/* جرس الإشعارات */
+.iconbtn .badge { position: absolute; top: -4px; inset-inline-start: -4px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 99px; background: var(--red);
+  color: #fff; font-size: 10px; font-weight: 700; font-style: normal; display: grid; place-items: center; box-shadow: 0 0 0 2px var(--bg); }
+.iconbtn .badge[hidden] { display: none; }
+.notif.new { background: rgba(var(--a-rgb), .08); } .notif.new b::after { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--a); margin-inline-start: 6px; vertical-align: middle; }
+.notif .av svg { width: 18px; height: 18px; }
+/* لوجو Nabdify صغير فوق في كل الشاشات */
+.brandmark { height: 22px; margin-bottom: 10px; } .brandmark img { height: 100%; width: auto; display: block; }
+.brandmark .wm-light { display: none; }
+:root[data-theme="light"] .brandmark .wm-dark { display: none; } :root[data-theme="light"] .brandmark .wm-light { display: block; }
